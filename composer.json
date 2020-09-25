@@ -1,0 +1,24 @@
+{
+    "name": "kingchannels/transmissionchain",
+    "description": "中新金桥信息技术知传链PHP-SDK",
+    "type": "library",
+    "license": "MIT",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "JiangZhibin",
+            "email": "jiangzb@kingchannels.com"
+        }
+    ],
+
+    "require": {
+        "php": ">=7.0.0",
+        "guzzlehttp/guzzle": "^6.4"
+    },
+
+    "autoload":{
+        "psr-4":{
+           "Jzb\\": "src"
+        }
+    }
+}
