@@ -1,5 +1,5 @@
 <?php
-require '../vendor/autoload.php';
+require '../vendor/autoload.php'; // 修改为你的vendor下的autoload文件地址
 
 use Jzb\Request;
 $request = new Request();
