@@ -1,0 +1,5 @@
+{
+    "require": {
+        "kingchannels/transmissionchain": "dev-master"
+    }
+}
