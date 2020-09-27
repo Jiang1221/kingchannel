@@ -8,21 +8,22 @@ use Jzb\common\MyException;
 class Request
 {
     /**
-     * @param string $apiName 接口地址 例如: /passport/net/passport/login
-     * @param array $param 请求接口所用参数 key=>value模式 例如：['number' => '13800000001', 'password' => '123456']
-     * @return bool|mixed|string
-     */
-    public function post(string $apiName, array $param = []){
-        return Helper::request($apiName, 'POST', $param);
-    }
-
-    /**
      * @param string $apiName 接口地址 例如: /resource/php/content/detail
      * @param array $param 请求接口所用参数 key=>value模式 例如：['id' => 758993325901484032]
      * @return bool|mixed|string
      */
-    public function get(string $apiName, array $param = []){
+    public static function get(string $apiName, array $param = []){
         return Helper::request($apiName, 'GET', $param);
+    }
+
+
+    /**
+     * @param string $apiName 接口地址 例如: /passport/net/passport/login
+     * @param array $param 请求接口所用参数 key=>value模式 例如：['number' => '13800000001', 'password' => '123456']
+     * @return bool|mixed|string
+     */
+    public static function post(string $apiName, array $param = []){
+        return Helper::request($apiName, 'POST', $param);
     }
 
 
