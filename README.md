@@ -3,7 +3,7 @@
 > 运行环境要求PHP7.0+。
 
 ## 前期准备
-*获取（申请）应用相关信息（appId,appSecret,deviceToken）
+获取（申请）应用相关信息（appId,appSecret,deviceToken）
 
 ## 使用方法
 * 1.在/src/common/Config.php文件中，填写获取到的应用ID,应用secret(appId,appSecret);
