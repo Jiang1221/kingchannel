@@ -104,6 +104,11 @@ class Helper
      */
     public static function getPublicParam($param)
     {
+        // 判断配置信息是否填写
+        foreach (Config::$appInfo as $v){
+            if(empty($v)) throw new MyException('请先填写配置信息');
+        }
+
         // 从配置文件中取相关参数
         $publicParam = [
             'X_Public_AppId' => Config::$appInfo['appId'],
