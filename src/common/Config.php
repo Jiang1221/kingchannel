@@ -3,7 +3,7 @@ namespace Jzb\common;
 
 class Config{
 
-    const GATEWAY_URL = 'http://develop.kingchannels.cn:50112/transfer';
+    const GATEWAY_URL = ''; // 接口基地址
 
     public static $appInfo = [
         'appId' => '', // 您的应用Id

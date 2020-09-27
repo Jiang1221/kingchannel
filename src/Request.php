@@ -22,7 +22,6 @@ class Request
      * @return bool|mixed|string
      */
     public function get(string $apiName, array $param = []){
-        var_dump(Helper::request($apiName, 'GET', $param));exit;
         return Helper::request($apiName, 'GET', $param);
     }
 
@@ -30,7 +29,7 @@ class Request
     /**
      * 获取设备编码
      */
-    public function getDeviceToken()
+    /*public function getDeviceToken()
     {
         $url = Config::GATEWAY_URL . '/passport/net/device/create';
         $deviceToken = md5(uniqid(microtime(true),true));
@@ -45,7 +44,7 @@ class Request
 
         throw new MyException('绑定设备失败!');
 
-    }
+    }*/
 
 
 }
