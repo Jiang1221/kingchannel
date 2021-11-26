@@ -6,7 +6,16 @@ use function GuzzleHttp\Promise\is_settled;
 
 class Helper
 {
-    public static function request(string $apiName, $method = 'GET', array $param = [], $timeout = 10)
+    /**
+     * @param string $apiName 接口名
+     * @param string $method 请求方法：GET/POST
+     * @param array $param 请求参数
+     * @param int $timeout 请求时间 默认十秒
+     * @param bool $toArray 是否将请求结果转为数组：true-是（默认） false-否
+     * @return array|bool|mixed|string
+     * @throws MyException
+     */
+    public static function request(string $apiName, $method = 'GET', array $param = [], $timeout = 10, $toArray = true)
     {
         if (empty($apiName)) return false;
 
@@ -19,7 +28,7 @@ class Helper
         // 获取签名
         $param = self::generateToken($param);
 
-        return self::guzzleRequest($url, $method, $param, $timeout);
+        return self::guzzleRequest($url, $method, $param, $timeout, $toArray);
     }
 
 
@@ -29,10 +38,11 @@ class Helper
      * @param string $method 请求方式
      * @param array $param 请求参数
      * @param int $timeout 请求超时时间
+     * @param bool $toArray 是否将请求结果转为数组：true-是（默认） false-否
      * @return bool|mixed|string
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public static function guzzleRequest(string $url, $method = 'GET', array $param = [], $timeout = 10)
+    public static function guzzleRequest(string $url, $method = 'GET', array $param = [], $timeout = 10, $toArray = true)
     {
         // 是否在支持的请求方式内
         $methods = ['GET', 'POST'];
@@ -49,6 +59,7 @@ class Helper
             $client = new Client(['verify' => false, 'timeout' => $timeout, 'http_errors' => false]); // https请求不验证cert
             $response = $client->request($method, $url, $param);
             $result = $response->getBody()->getContents();
+            if($toArray == false) return $result;
 
             // 返回请求结果
             return self::setResult($result);
