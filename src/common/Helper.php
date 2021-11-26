@@ -1,4 +1,5 @@
 <?php
+
 namespace Jzb\Common;
 
 use GuzzleHttp\Client;
@@ -15,7 +16,12 @@ class Helper
      * @return array|bool|mixed|string
      * @throws MyException
      */
-    public static function request(string $apiName, $method = 'GET', array $param = [], $timeout = 10, $toArray = true)
+    public static function request(
+        string $apiName,
+        $method = 'GET',
+        array $param = [],
+        $timeout = 10,
+        $toArray = true)
     {
         if (empty($apiName)) return false;
 
@@ -42,7 +48,12 @@ class Helper
      * @return bool|mixed|string
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public static function guzzleRequest(string $url, $method = 'GET', array $param = [], $timeout = 10, $toArray = true)
+    public static function guzzleRequest(
+        string $url,
+        $method = 'GET',
+        array $param = [],
+        $timeout = 10,
+        $toArray = true)
     {
         // 是否在支持的请求方式内
         $methods = ['GET', 'POST'];
@@ -59,9 +70,9 @@ class Helper
             $client = new Client(['verify' => false, 'timeout' => $timeout, 'http_errors' => false]); // https请求不验证cert
             $response = $client->request($method, $url, $param);
             $result = $response->getBody()->getContents();
-            if($toArray == false) return $result;
 
             // 返回请求结果
+            if ($toArray == false) return $result;
             return self::setResult($result);
 
         } catch (\Exception $e) {
@@ -97,10 +108,10 @@ class Helper
             return $data;
         }
 
-        if(isset($res['Success'])) $data['Success'] = $res['Success'];
-        if(isset($res['Code'])) $data['Code'] = $res['Code'];
-        if(isset($res['Description'])) $data['Description'] = $res['Description'];
-        if(isset($res['Data'])) $data['Data'] = $res['Data'];
+        if (isset($res['Success'])) $data['Success'] = $res['Success'];
+        if (isset($res['Code'])) $data['Code'] = $res['Code'];
+        if (isset($res['Description'])) $data['Description'] = $res['Description'];
+        if (isset($res['Data'])) $data['Data'] = $res['Data'];
         return $data;
     }
 
@@ -114,14 +125,14 @@ class Helper
     public static function getPublicParam($param)
     {
         // 判断配置信息是否填写
-        foreach (Config::$appInfo as $v){
-            if(empty($v)) throw new MyException('请先填写配置信息');
+        foreach (Config::$appInfo as $v) {
+            if (empty($v)) throw new MyException('请先填写配置信息');
         }
 
         $clientTimezone = date_default_timezone_get(); // 获取用户当前配置的时区 用户没配置时 默认是UTC时间
-        if($clientTimezone != 'UTC') date_default_timezone_set('UTC'); // 使用0时区时间
+        if ($clientTimezone != 'UTC') date_default_timezone_set('UTC'); // 使用0时区时间
         $time = date('Y-m-d H:i:s');
-        if($clientTimezone != 'UTC') date_default_timezone_set($clientTimezone); // 改回用户自己设置的时区
+        if ($clientTimezone != 'UTC') date_default_timezone_set($clientTimezone); // 改回用户自己设置的时区
 
         // 从配置文件中取相关参数
         $publicParam = [
@@ -130,7 +141,7 @@ class Helper
             'X_Public_DeviceToken' => Config::$appInfo['apiVersion'],
             'X_Public_AppVersion' => Config::$appInfo['apiVersion'],
             'X_Public_TimeStamp' => $time,
-            'X_Public_Nonce' => md5(uniqid(microtime(true),true)), // 唯一随机32位字符串
+            'X_Public_Nonce' => md5(uniqid(microtime(true), true)), // 唯一随机32位字符串
         ];
 
         return array_merge($param, $publicParam);
