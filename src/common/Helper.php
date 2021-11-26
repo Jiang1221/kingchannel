@@ -10,10 +10,8 @@ class Helper
     {
         if (empty($apiName)) return false;
 
-        // 网关地址
-        $gatewayUrl = 'http://develop.kingchannels.cn:50112/transfer';
         // 拼接完整地址
-        $url = $gatewayUrl . $apiName;
+        $url = Config::GATEWAY_URL . $apiName;
 
         // 补充公共参数
         $param = self::getPublicParam($param);
